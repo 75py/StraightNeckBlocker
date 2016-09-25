@@ -60,7 +60,7 @@ public class MainService extends Service {
                             return;
                         }
                         final double patch = orientationManager.getPatch();
-                        Timber.i("傾き＝%s", patch);
+                        Timber.d("傾き＝%s", patch);
 
                         blocker.updatePatch(patch);
                         Status status = blocker.judge();
@@ -128,6 +128,7 @@ public class MainService extends Service {
     private BroadcastReceiver screenOnReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            Timber.d("SCREEN ON");
             orientationManager.resume();
             timerHandler.start();
         }
@@ -136,6 +137,7 @@ public class MainService extends Service {
     private BroadcastReceiver screenOffReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            Timber.d("SCREEN OFF");
             pause();
         }
     };
