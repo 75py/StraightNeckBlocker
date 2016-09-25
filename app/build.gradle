@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'com.cookpad.android.licensetools'
 
+apply from: 'release.gradle', to: android
+
 android {
     compileSdkVersion 24
     buildToolsVersion "23.0.3"
@@ -19,8 +21,9 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 

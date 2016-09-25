@@ -10,9 +10,9 @@ import android.widget.Toast;
 
 import com.nagopy.android.straightneckblocker.App;
 import com.nagopy.android.straightneckblocker.BuildConfig;
+import com.nagopy.android.straightneckblocker.R;
 import com.nagopy.android.straightneckblocker.model.NotificationHandler;
 import com.nagopy.android.straightneckblocker.model.OrientationManager;
-import com.nagopy.android.straightneckblocker.model.PkgMonitor;
 import com.nagopy.android.straightneckblocker.model.ReceiverHandler;
 import com.nagopy.android.straightneckblocker.model.TimerHandler;
 import com.nagopy.android.straightneckblocker.model.impl.Status;
@@ -40,9 +40,6 @@ public class MainService extends Service {
     ReceiverHandler screenOnBroadcastReceiverHandler;
     @Inject
     ReceiverHandler screenOffBroadcastReceiverHandler;
-
-    @Inject
-    PkgMonitor pkgMonitor;
 
     @Inject
     StraightNeckBlockerImpl blocker;
@@ -76,17 +73,6 @@ public class MainService extends Service {
             }
         });
         notificationHandler.init();
-        pkgMonitor.setOnNext(new Action1<CharSequence>() {
-            @Override
-            public void call(CharSequence pkg) {
-                Timber.d("pkg=%s", pkg);
-            }
-        }).setOnError(new Action1<Throwable>() {
-            @Override
-            public void call(Throwable e) {
-                Timber.e(e, "何かに失敗");
-            }
-        });
 
         orientationManager.resume();
         timerHandler.start();
@@ -96,7 +82,6 @@ public class MainService extends Service {
         screenOffBroadcastReceiverHandler.setActions(Intent.ACTION_SCREEN_OFF)
                 .setReceiver(screenOffReceiver)
                 .register();
-        pkgMonitor.subscribe();
     }
 
     @Override
@@ -105,7 +90,7 @@ public class MainService extends Service {
             String action = intent.getAction();
             if (ACTION_PAUSE.equals(action)) {
                 pause();
-                Toast.makeText(this, "Pause", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.msg_pause, Toast.LENGTH_LONG).show();
             }
         }
         return super.onStartCommand(intent, flags, startId);
@@ -119,7 +104,6 @@ public class MainService extends Service {
         notificationHandler.destroy();
         screenOnBroadcastReceiverHandler.unregister();
         screenOffBroadcastReceiverHandler.unregister();
-        pkgMonitor.unsubscribe();
     }
 
     @Nullable

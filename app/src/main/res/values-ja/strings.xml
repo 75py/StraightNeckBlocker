@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">ストレートネック ブロッカー</string>
+    <string name="open_source_license">オープンソースライセンス</string>
+
+    <string name="notification_msg_patch">傾き %s</string>
+
+    <string name="notification_status_none">計測中</string>
+    <string name="notification_status_stay">固定されています</string>
+    <string name="notification_status_nice">良い角度です</string>
+    <string name="notification_status_bad">姿勢が悪いです！</string>
+    <string name="notification_status_lie">もしかして寝転がってる？</string>
+
+    <string name="msg1">ストレートネックブロッカーは、スマホの角度を監視し、適切な角度で使用することをサポートします。</string>
+    <string name="msg2">一定時間 30度 以上傾けていると、警告が表示されます。</string>
+    <string name="msg3">平安歌人になったような気持ちでスマホを持ち、顔を上げて操作しましょう。</string>
+
+    <string name="msg_pause">一時停止しました。次に画面オンになると再起動します</string>
+</resources>

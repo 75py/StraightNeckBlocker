@@ -4,9 +4,9 @@ import android.content.Context;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.view.LayoutInflater;
-import android.widget.Toast;
 
 import com.nagopy.android.straightneckblocker.databinding.ViewPopupToastBinding;
+import com.nagopy.android.straightneckblocker.model.ToastHandler;
 import com.nagopy.android.straightneckblocker.viewmodel.PopupViewModel;
 
 import javax.inject.Inject;
@@ -19,8 +19,10 @@ public class PopupToastView implements PopupView {
     @Inject
     PopupViewModel popupViewModel;
 
+    @Inject
+    ToastHandler toastHandler;
+
     ViewPopupToastBinding binding;
-    Toast toast;
 
     @Inject
     PopupToastView() {
@@ -30,11 +32,7 @@ public class PopupToastView implements PopupView {
     public PopupView init() {
         binding = ViewPopupToastBinding.inflate(LayoutInflater.from(context));
         binding.setVm(popupViewModel);
-
-        toast = new Toast(context);
-        toast.setDuration(Toast.LENGTH_LONG);
-        toast.setView(binding.getRoot());
-
+        toastHandler.setView(binding.getRoot());
         return this;
     }
 
@@ -58,12 +56,12 @@ public class PopupToastView implements PopupView {
 
     @Override
     public void show() {
-        toast.show();
+        toastHandler.show();
     }
 
     @Override
     public void cancel() {
-        toast.cancel();
+        toastHandler.cancel();
     }
 
 }

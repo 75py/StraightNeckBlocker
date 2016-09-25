@@ -23,13 +23,15 @@ public class StraightNeckBlockerImpl implements StraightNeckBlocker {
             return Status.NONE;
         }
 
-        boolean changed1 = Math.abs(data.current - data.prev1) < 1;
-        boolean changed2 = Math.abs(data.prev2 - data.prev2) < 1;
+        boolean changed1 = Math.abs(data.current - data.prev1) < 1.5;
+        boolean changed2 = Math.abs(data.prev2 - data.prev2) < 1.5;
         if (changed1 && changed2) {
             return Status.STAY;
         } else {
-            if (data.current < 35) {
+            if (data.current <= 30.0) {
                 return Status.NICE;
+            } else if (data.current > 180.0) {
+                return Status.LIE;
             } else {
                 return Status.BAD;
             }

@@ -14,7 +14,9 @@ public enum Status {
     NONE(R.string.notification_status_none, R.mipmap.ic_normal, R.drawable.ic_stat_normal),
     STAY(R.string.notification_status_stay, R.mipmap.ic_normal, R.drawable.ic_stat_normal),
     NICE(R.string.notification_status_nice, R.mipmap.ic_good, R.drawable.ic_stat_good),
-    BAD(R.string.notification_status_bad, R.mipmap.ic_bad, R.drawable.ic_stat_bad);
+    BAD(R.string.notification_status_bad, R.mipmap.ic_bad, R.drawable.ic_stat_bad),
+    LIE(R.string.notification_status_lie, R.mipmap.ic_normal, R.drawable.ic_stat_normal),
+    ;
 
     @StringRes
     final int notificationMessage;

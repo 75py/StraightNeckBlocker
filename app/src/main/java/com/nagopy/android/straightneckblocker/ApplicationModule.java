@@ -13,16 +13,16 @@ import android.view.accessibility.AccessibilityManager;
 
 import com.nagopy.android.straightneckblocker.model.NotificationHandler;
 import com.nagopy.android.straightneckblocker.model.OrientationManager;
-import com.nagopy.android.straightneckblocker.model.PkgMonitor;
 import com.nagopy.android.straightneckblocker.model.ReceiverHandler;
 import com.nagopy.android.straightneckblocker.model.StraightNeckBlocker;
 import com.nagopy.android.straightneckblocker.model.TimerHandler;
+import com.nagopy.android.straightneckblocker.model.ToastHandler;
 import com.nagopy.android.straightneckblocker.model.impl.NotificationHandlerImpl;
 import com.nagopy.android.straightneckblocker.model.impl.OrientationManagerImpl;
-import com.nagopy.android.straightneckblocker.model.impl.PkgMonitorImpl;
 import com.nagopy.android.straightneckblocker.model.impl.ReceiverHandlerImpl;
 import com.nagopy.android.straightneckblocker.model.impl.StraightNeckBlockerImpl;
 import com.nagopy.android.straightneckblocker.model.impl.TimerHandlerImpl;
+import com.nagopy.android.straightneckblocker.model.impl.ToastHandlerImpl;
 import com.nagopy.android.straightneckblocker.view.PopupToastView;
 import com.nagopy.android.straightneckblocker.view.PopupView;
 
@@ -106,11 +106,13 @@ public class ApplicationModule {
         return notificationHandler;
     }
 
+    @Singleton
     @Provides
     public PopupView providePopUpView(PopupToastView popUpView) {
         return popUpView;
     }
 
+    @Singleton
     @Provides
     public ReceiverHandler provideReceiverHandler(ReceiverHandlerImpl receiverHandler) {
         return receiverHandler;
@@ -118,12 +120,13 @@ public class ApplicationModule {
 
     @Singleton
     @Provides
-    PkgMonitor providePkgMonitor(PkgMonitorImpl pkgMonitor) {
-        return pkgMonitor;
+    StraightNeckBlocker provideStraightNeckBlocker(StraightNeckBlockerImpl straightNeckBlocker) {
+        return straightNeckBlocker;
     }
 
     @Singleton
-    StraightNeckBlocker provideStraightNeckBlocker(StraightNeckBlockerImpl straightNeckBlocker) {
-        return straightNeckBlocker;
+    @Provides
+    ToastHandler provideToastHandler(ToastHandlerImpl toastHandler) {
+        return toastHandler;
     }
 }
