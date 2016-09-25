@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Straight Neck Blocker</string>
+    <string name="open_source_license">オープンソースライセンス</string>
+
+    <string name="notification_msg_patch">傾き %s</string>
+
+    <string name="notification_status_none">計測中</string>
+    <string name="notification_status_stay">固定されています</string>
+    <string name="notification_status_nice">良い角度です</string>
+    <string name="notification_status_bad">姿勢が悪いです！</string>
+
+    <string name="accessibility_description">どのアプリケーションを使用しているかを判定できるようになります。</string>
+</resources>

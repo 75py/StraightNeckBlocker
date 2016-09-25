@@ -1,0 +1,41 @@
+- artifact: com.android.databinding:+:+
+  skip: true
+
+- artifact: com.google.android.gms:+:+
+  skip: true
+
+- artifact: com.google.firebase:+:+
+  skip: true # TODO
+
+- artifact: com.android.support:+:+
+  name: Android Support Libraries
+  copyrightHolder: The Android Open Source Project
+  license: apache2
+
+- artifact: com.google.dagger:dagger:+
+  name: Dagger
+  copyrightHolder: The Dagger Authors
+  license: apache2
+
+- artifact: javax.inject:javax.inject:+
+  name: javax.inject
+  copyrightHolder: The JSR-330 Expert Group
+  license: The Apache Software License, Version 2.0
+  url: http://code.google.com/p/atinject/
+
+- artifact: com.jakewharton.timber:timber:+
+  name: Timber
+  copyrightHolder: Jake Wharton
+  license: The Apache Software License, Version 2.0
+  url: https://github.com/JakeWharton/timber
+
+- artifact: io.reactivex:rxandroid:+
+  name: RxAndroid
+  copyrightHolder: The RxAndroid authors
+  license: The Apache Software License, Version 2.0
+  url: https://github.com/ReactiveX/RxAndroid
+- artifact: io.reactivex:rxjava:+
+  name: RxJava
+  copyrightHolder: Netflix, Inc.
+  license: The Apache Software License, Version 2.0
+  url: https://github.com/ReactiveX/RxJava

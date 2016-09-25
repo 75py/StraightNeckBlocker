@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="view_popup_padding_vertical">8dp</dimen>
+    <dimen name="view_popup_padding_horizontal">8dp</dimen>
+    <dimen name="view_popup_icon_vertical_margin">8dp</dimen>
+
+    <dimen name="activity_main_text_margin">16dp</dimen>
+</resources>
