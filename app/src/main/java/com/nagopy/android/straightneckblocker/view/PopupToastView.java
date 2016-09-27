@@ -32,6 +32,7 @@ public class PopupToastView implements PopupView {
     public PopupView init() {
         binding = ViewPopupToastBinding.inflate(LayoutInflater.from(context));
         binding.setVm(popupViewModel);
+        binding.getRoot().setAlpha(0.77f);
         toastHandler.setView(binding.getRoot());
         return this;
     }
