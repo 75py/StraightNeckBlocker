@@ -3,7 +3,9 @@ package com.nagopy.android.straightneckblocker.view;
 import android.content.Context;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
+import android.support.v4.view.ViewCompat;
 import android.view.LayoutInflater;
+import android.view.View;
 
 import com.nagopy.android.straightneckblocker.databinding.ViewPopupToastBinding;
 import com.nagopy.android.straightneckblocker.model.ToastHandler;
@@ -32,8 +34,11 @@ public class PopupToastView implements PopupView {
     public PopupView init() {
         binding = ViewPopupToastBinding.inflate(LayoutInflater.from(context));
         binding.setVm(popupViewModel);
-        binding.getRoot().setAlpha(0.77f);
-        toastHandler.setView(binding.getRoot());
+
+        View v = binding.getRoot();
+        v.setAlpha(0.85f);
+        ViewCompat.setElevation(v, 50);
+        toastHandler.setView(v);
         return this;
     }
 
