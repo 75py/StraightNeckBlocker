@@ -54,15 +54,21 @@ public class ToastHandlerImpl implements ToastHandler {
         }
         show = true;
 
-        hideDelayed(5000);
-    }
-
-    synchronized void hideDelayed(long delayMillis) {
-        handler.postDelayed(runnableHide, delayMillis);
+        // hideDelayed(5000);
     }
 
     @Override
     public synchronized void cancel() {
+        if (show) {
+            hideDelayed(2000);
+        }
+    }
+
+    void hideDelayed(long delayMillis) {
+        handler.postDelayed(runnableHide, delayMillis);
+    }
+
+    void hide() {
         if (show) {
             windowManager.removeView(view);
         }
@@ -72,7 +78,7 @@ public class ToastHandlerImpl implements ToastHandler {
     private Runnable runnableHide = new Runnable() {
         @Override
         public void run() {
-            cancel();
+            hide();
         }
     };
 }

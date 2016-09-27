@@ -32,7 +32,7 @@ public class NotificationHandlerImpl implements NotificationHandler {
 
     NotificationCompat.Builder builder;
 
-    DataList<Status> statusLog = new DataList<>();
+    int badCount = 0;
 
     @Inject
     NotificationHandlerImpl() {
@@ -73,18 +73,19 @@ public class NotificationHandlerImpl implements NotificationHandler {
                 .setLargeIcon(status.getLargeIcon(context))
                 .setSmallIcon(status.statIcon);
 
-        statusLog.update(status);
         popupView.setTitle(status.notificationMessage)
                 .setMessage(R.string.notification_msg_patch, patch)
                 .setIcon(status.icon);
-        if (statusLog.ready()
-                && statusLog.current == Status.BAD
-                && statusLog.prev1 == Status.BAD
-                && statusLog.prev2 == Status.BAD) {
-            vibrator.vibrate(200);
-            statusLog.clear();
 
-            popupView.show();
+        if (status == Status.BAD) {
+            badCount++;
+            if (badCount == 3) {
+                vibrator.vibrate(200);
+                popupView.show();
+            }
+        } else {
+            badCount = 0;
+            popupView.cancel();
         }
 
         notificationManagerCompat.notify(R.string.app_name, builder.build());
