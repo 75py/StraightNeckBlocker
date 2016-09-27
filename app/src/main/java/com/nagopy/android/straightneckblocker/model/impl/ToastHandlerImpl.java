@@ -8,10 +8,13 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.nagopy.android.straightneckblocker.App;
 import com.nagopy.android.straightneckblocker.model.ToastHandler;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import timber.log.Timber;
 
 @Singleton
 public class ToastHandlerImpl implements ToastHandler {
@@ -35,8 +38,13 @@ public class ToastHandlerImpl implements ToastHandler {
                         | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
                         | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 PixelFormat.TRANSLUCENT);
-        params.y = 100;
-        params.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
+
+        // 画面サイズの10%余白
+        // TODO 画面回転時に更新。できればContextの取り方も検討したいが。。。
+        Timber.d("heightPixels = %d", App.context.getResources().getDisplayMetrics().heightPixels);
+        params.y = App.context.getResources().getDisplayMetrics().heightPixels / 10;
+
+        params.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
     }
 
     @Override

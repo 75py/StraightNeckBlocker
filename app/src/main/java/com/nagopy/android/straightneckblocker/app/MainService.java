@@ -47,6 +47,7 @@ public class MainService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        Timber.d("onCreate");
 
         ((App) getApplicationContext()).getApplicationComponent().inject(this);
 
@@ -86,6 +87,7 @@ public class MainService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Timber.d("onStartCommand");
         if (intent != null) {
             String action = intent.getAction();
             if (ACTION_PAUSE.equals(action)) {
@@ -99,6 +101,8 @@ public class MainService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Timber.d("onDestroy");
+
         timerHandler.stop();
         orientationManager.destroy();
         notificationHandler.destroy();

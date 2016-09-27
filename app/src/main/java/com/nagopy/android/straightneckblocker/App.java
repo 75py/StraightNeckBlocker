@@ -1,10 +1,12 @@
 package com.nagopy.android.straightneckblocker;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.google.android.gms.ads.MobileAds;
+import com.google.common.collect.TreeMultimap;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.crash.FirebaseCrash;
 
@@ -12,11 +14,14 @@ import timber.log.Timber;
 
 public class App extends Application {
 
+    public static Context context;
+
     ApplicationComponent applicationComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        App.context = this;
 
         applicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
@@ -48,6 +53,7 @@ public class App extends Application {
         }
 
         MobileAds.initialize(this, BuildConfig.AD_APP_ID);
+        Timber.d("onCreate");
     }
 
     public ApplicationComponent getApplicationComponent() {
