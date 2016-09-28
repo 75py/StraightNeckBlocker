@@ -92,6 +92,12 @@ public class NotificationHandlerImpl implements NotificationHandler {
     }
 
     @Override
+    public void hide() {
+        notificationManagerCompat.cancel(R.string.app_name);
+        popupView.cancel();
+    }
+
+    @Override
     public void destroy() {
         notificationManagerCompat.cancel(R.string.app_name);
     }

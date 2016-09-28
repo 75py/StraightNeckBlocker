@@ -119,6 +119,8 @@ public class MainService extends Service {
     private void pause() {
         orientationManager.pause();
         timerHandler.stop();
+        blocker.invalidateCache();
+        notificationHandler.hide();
     }
 
     public static void start(Context context) {

@@ -18,6 +18,11 @@ public class StraightNeckBlockerImpl implements StraightNeckBlocker {
         data.update(patch);
     }
 
+    @Override
+    public void invalidateCache() {
+        data.clear();
+    }
+
     public Status judge() {
         if (!data.ready()) {
             return Status.NONE;

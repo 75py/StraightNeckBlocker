@@ -8,6 +8,8 @@ public interface NotificationHandler {
 
     void update(double patch, Status status);
 
+    void hide();
+
     void destroy();
 
 }

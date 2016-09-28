@@ -6,5 +6,7 @@ public interface StraightNeckBlocker {
 
     void updatePatch(double patch);
 
+    void invalidateCache();
+
     Status judge();
 }
