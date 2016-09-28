@@ -2,6 +2,7 @@ package com.nagopy.android.straightneckblocker;
 
 import android.app.ActivityManager;
 import android.app.Application;
+import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.hardware.SensorManager;
@@ -86,6 +87,12 @@ public class ApplicationModule {
     @Provides
     AccessibilityManager provideAccessibilityManager() {
         return (AccessibilityManager) application.getSystemService(Context.ACCESSIBILITY_SERVICE);
+    }
+
+    @Singleton
+    @Provides
+    KeyguardManager provideKeyguardManager() {
+        return (KeyguardManager) application.getSystemService(Context.KEYGUARD_SERVICE);
     }
 
     @Singleton

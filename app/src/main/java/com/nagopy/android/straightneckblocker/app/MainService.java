@@ -1,5 +1,6 @@
 package com.nagopy.android.straightneckblocker.app;
 
+import android.app.KeyguardManager;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -44,6 +45,9 @@ public class MainService extends Service {
     @Inject
     StraightNeckBlockerImpl blocker;
 
+    @Inject
+    KeyguardManager keyguardManager;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -77,8 +81,9 @@ public class MainService extends Service {
 
         orientationManager.resume();
         timerHandler.start();
-        screenOnBroadcastReceiverHandler.setActions(Intent.ACTION_SCREEN_ON)
-                .setReceiver(screenOnReceiver)
+        screenOnBroadcastReceiverHandler.setActions(
+                Intent.ACTION_SCREEN_ON, Intent.ACTION_USER_PRESENT)
+                .setReceiver(unlockReceiver)
                 .register();
         screenOffBroadcastReceiverHandler.setActions(Intent.ACTION_SCREEN_OFF)
                 .setReceiver(screenOffReceiver)
@@ -116,6 +121,11 @@ public class MainService extends Service {
         return null;
     }
 
+    private void resume() {
+        orientationManager.resume();
+        timerHandler.start();
+    }
+
     private void pause() {
         orientationManager.pause();
         timerHandler.stop();
@@ -131,12 +141,19 @@ public class MainService extends Service {
         context.stopService(new Intent(context, MainService.class));
     }
 
-    private BroadcastReceiver screenOnReceiver = new BroadcastReceiver() {
+    private BroadcastReceiver unlockReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Timber.d("SCREEN ON");
-            orientationManager.resume();
-            timerHandler.start();
+            if (Intent.ACTION_USER_PRESENT.equals(intent.getAction())) {
+                Timber.d("SCREEN ON + UNLOCK");
+                resume();
+            } else {
+                Timber.d("SCREEN ON");
+                if (!keyguardManager.inKeyguardRestrictedInputMode()) {
+                    Timber.d("NO LOCKED");
+                    resume();
+                }
+            }
         }
     };
 
