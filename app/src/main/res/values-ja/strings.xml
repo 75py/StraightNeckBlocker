@@ -14,5 +14,5 @@
     <string name="msg2">一定時間 30度 以上傾けていると、警告が表示されます。</string>
     <string name="msg3">平安歌人になったような気持ちでスマホを持ち、顔を上げて操作しましょう。</string>
 
-    <string name="msg_pause">一時停止しました。次に画面オンになると再起動します</string>
+    <string name="msg_pause">一時停止しました</string>
 </resources>
