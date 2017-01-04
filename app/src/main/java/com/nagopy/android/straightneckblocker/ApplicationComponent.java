@@ -1,5 +1,6 @@
 package com.nagopy.android.straightneckblocker;
 
+import com.nagopy.android.straightneckblocker.app.BootCompletedReceiver;
 import com.nagopy.android.straightneckblocker.app.MainActivity;
 import com.nagopy.android.straightneckblocker.app.MainService;
 
@@ -14,4 +15,6 @@ public interface ApplicationComponent {
     void inject(MainService mainService);
 
     void inject(MainActivity mainActivity);
+
+    void inject(BootCompletedReceiver bootCompletedReceiver);
 }

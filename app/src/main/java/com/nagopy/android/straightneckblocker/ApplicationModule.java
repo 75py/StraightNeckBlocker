@@ -18,15 +18,18 @@ import com.nagopy.android.straightneckblocker.model.ReceiverHandler;
 import com.nagopy.android.straightneckblocker.model.StraightNeckBlocker;
 import com.nagopy.android.straightneckblocker.model.TimerHandler;
 import com.nagopy.android.straightneckblocker.model.ToastHandler;
+import com.nagopy.android.straightneckblocker.model.UserSettings;
 import com.nagopy.android.straightneckblocker.model.impl.NotificationHandlerImpl;
 import com.nagopy.android.straightneckblocker.model.impl.OrientationManagerImpl;
 import com.nagopy.android.straightneckblocker.model.impl.ReceiverHandlerImpl;
 import com.nagopy.android.straightneckblocker.model.impl.StraightNeckBlockerImpl;
 import com.nagopy.android.straightneckblocker.model.impl.TimerHandlerImpl;
 import com.nagopy.android.straightneckblocker.model.impl.ToastHandlerImpl;
+import com.nagopy.android.straightneckblocker.model.impl.UserSettingsImpl;
 import com.nagopy.android.straightneckblocker.view.PopupToastView;
 import com.nagopy.android.straightneckblocker.view.PopupView;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -121,7 +124,15 @@ public class ApplicationModule {
 
     @Singleton
     @Provides
-    public ReceiverHandler provideReceiverHandler(ReceiverHandlerImpl receiverHandler) {
+    @Named("screenOnBroadcastReceiverHandler")
+    public ReceiverHandler provideScreenOnReceiverHandler(ReceiverHandlerImpl receiverHandler) {
+        return receiverHandler;
+    }
+
+    @Singleton
+    @Provides
+    @Named("screenOffBroadcastReceiverHandler")
+    public ReceiverHandler provideScreenOffReceiverHandler(ReceiverHandlerImpl receiverHandler) {
         return receiverHandler;
     }
 
@@ -135,5 +146,11 @@ public class ApplicationModule {
     @Provides
     ToastHandler provideToastHandler(ToastHandlerImpl toastHandler) {
         return toastHandler;
+    }
+
+    @Singleton
+    @Provides
+    UserSettings provideUserSettings(UserSettingsImpl userSettings) {
+        return userSettings;
     }
 }

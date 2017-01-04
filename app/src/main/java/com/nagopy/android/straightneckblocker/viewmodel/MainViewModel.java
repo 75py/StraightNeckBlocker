@@ -1,9 +1,12 @@
 package com.nagopy.android.straightneckblocker.viewmodel;
 
 import android.app.Activity;
-import android.content.Context;
+import android.databinding.ObservableBoolean;
+import android.view.View;
+import android.widget.ToggleButton;
 
 import com.nagopy.android.straightneckblocker.app.MainService;
+import com.nagopy.android.straightneckblocker.model.UserSettings;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -12,9 +15,11 @@ import javax.inject.Singleton;
 public class MainViewModel {
 
     @Inject
-    Context context;
+    UserSettings userSettings;
 
     Activity activity;
+
+    public ObservableBoolean isServiceEnabled = new ObservableBoolean(false);
 
     @Inject
     MainViewModel() {
@@ -22,11 +27,25 @@ public class MainViewModel {
 
     public void onCreate(Activity activity) {
         this.activity = activity;
-        MainService.start(context);
+        isServiceEnabled.set(userSettings.isEnabled());
+        updateServiceEnabled(userSettings.isEnabled());
     }
 
     public void onDestroy() {
         this.activity = null;
     }
 
+    public void onClickToggleBtn(View v) {
+        ToggleButton tb = (ToggleButton) v;
+        updateServiceEnabled(tb.isChecked());
+    }
+
+    void updateServiceEnabled(boolean enabled) {
+        userSettings.setEnabled(enabled);
+        if (enabled) {
+            MainService.start(activity.getApplicationContext());
+        } else {
+            MainService.stop(activity.getApplicationContext());
+        }
+    }
 }

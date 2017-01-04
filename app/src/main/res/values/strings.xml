@@ -15,4 +15,6 @@
     <string name="msg3">平安歌人になったような気持ちでスマホを持ち、顔を上げて操作しましょう。</string>
 
     <string name="msg_pause">Pause temporarily</string>
+    <string name="btn_enable">Enable</string>
+    <string name="btn_disable">Disable</string>
 </resources>

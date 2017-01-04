@@ -22,6 +22,7 @@ import com.nagopy.android.straightneckblocker.model.impl.StraightNeckBlockerImpl
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import rx.functions.Action1;
 import timber.log.Timber;
@@ -29,6 +30,7 @@ import timber.log.Timber;
 public class MainService extends Service {
 
     private static final String ACTION_PAUSE = BuildConfig.APPLICATION_ID + ".ACTION_PAUSE";
+    private static final String ACTION_STOP = BuildConfig.APPLICATION_ID + ".ACTION_STOP";
 
     @Inject
     OrientationManager orientationManager;
@@ -38,8 +40,10 @@ public class MainService extends Service {
     NotificationHandler notificationHandler;
 
     @Inject
+    @Named("screenOnBroadcastReceiverHandler")
     ReceiverHandler screenOnBroadcastReceiverHandler;
     @Inject
+    @Named("screenOffBroadcastReceiverHandler")
     ReceiverHandler screenOffBroadcastReceiverHandler;
 
     @Inject
@@ -95,9 +99,12 @@ public class MainService extends Service {
         Timber.d("onStartCommand");
         if (intent != null) {
             String action = intent.getAction();
+            Timber.d("action = %s", action);
             if (ACTION_PAUSE.equals(action)) {
                 pause();
                 Toast.makeText(this, R.string.msg_pause, Toast.LENGTH_LONG).show();
+            } else if (ACTION_STOP.equals(action)) {
+                stopSelf();
             }
         }
         return super.onStartCommand(intent, flags, startId);
@@ -138,7 +145,7 @@ public class MainService extends Service {
     }
 
     public static void stop(Context context) {
-        context.stopService(new Intent(context, MainService.class));
+        context.startService(new Intent(context, MainService.class).setAction(ACTION_STOP));
     }
 
     private BroadcastReceiver unlockReceiver = new BroadcastReceiver() {

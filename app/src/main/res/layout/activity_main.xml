@@ -58,6 +58,16 @@
                 android:drawableStart="@mipmap/ic_good"
                 android:text="@string/msg3" />
 
+            <ToggleButton
+                android:id="@+id/btnEnabled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/msg3"
+                android:layout_marginTop="@dimen/activity_main_text_margin"
+                android:checked="@{vm.isServiceEnabled}"
+                android:onClick="@{vm::onClickToggleBtn}"
+                android:textOff="@string/btn_disable"
+                android:textOn="@string/btn_enable" />
 
         </RelativeLayout>
     </ScrollView>
