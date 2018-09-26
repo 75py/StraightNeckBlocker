@@ -9,8 +9,8 @@ android {
         applicationId "com.nagopy.android.straightneckblocker"
         minSdkVersion 19
         targetSdkVersion 25
-        versionCode 6
-        versionName "1.3.0"
+        versionCode 7
+        versionName "1.3.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "AD_APP_ID", "\"ca-app-pub-2998260208076899~9715335360\""
